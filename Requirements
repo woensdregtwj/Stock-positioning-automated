@@ -1,0 +1,102 @@
+An app that calculates the risk:reward ratio based on a stock list that is
+imported via a text file from my watchlist on TradingView.
+The daily Open/High/Low/Close data will be obtained through pandas datareader.
+Depending on the strategy input settings, calculations will be made and end
+result will be extracted to an excel file.
+
+
+***Create a dataset that includes company name, ticker, buy, stop,
+profit target, RSI, MACD, Tradingview rating, total investment value,
+total shares,
+
+How will the program read my input file?
+- TKinter file dialog only
+
+How can I adjust my strategy criteria?
+- TKinter simple form UI;
+- Direct editing via the code;
+
+***We have to scrape the company name, in what class should this be done?
+- At Input when formatting the file;
+- At Output when pasting the data;
+- At OHLC when creating dataframes;
+
+Classes:
+- Input file (txt); > DONE
+- OHLC stock data reader;
+- Calculator;
+- Output file;
+- Tradingview scraper
+
+Input file:
+- Requests the input file;
+- Reads the input file;
+- Creates a list of tickers and reformats where necessary;
+
+OHLC stock data reader:
+- Requires the list of tickers from 'Input file';
+- Creates dataframe of ticker with an OHLC format;
+
+Calculator:
+- Has different types of strategies for calculating;
+- Requires the dataframe of 'OHLC stock data reader';
+- Calculates the R:R based on the instructions of the strategy;
+
+Output file:
+- Creates an excel file;
+- Pastes the results of the calculator per row;
+- Uses formula values so that user can easily change excel manually;
+- Scrapes the company name
+
+
+
+
+
+
+
+
+Create an app that calculates the risk:reward ratio based on the selected stock. The data will be obtained through yahoo finance and different types of readings and calculations will be done based on the strategy of what the user has selected. The output file will be an excel file that will display all necessary data for setting up the trade and judging whether the trade is realistic or not.
+
+The user can select the type of R:R strategy:
+- Pullback - stop loss at the lowest low of the last 5 trading days (should be able to be adjusted by the user), desired profit target at 20% above the previous pivot high;
+- Support bounce - stop loss either at lowest low under support or 20% lower than support line, desired profit target 10% above resistance line (previous pivot high);
+- Outbreak - stop loss in between support and resistance; desired profit target similar to same length of total distance between support and resistance;
+- Anti/Bottoming - Stop loss at support or lowest point, profit target at highest point of the chosen amount of days.
+- Plain - Stop 2% lower than actual price, target either at highest point or % above resistance. Could be activated when buy r:r ratio is too low due to buy price being too high from support
+
+Classes:
+- Input file;
+- Calculator;
+- Stock data;
+- Strategy/Settings;
+- Output file;
+- User Interface/User Input
+
+Input file:
+- Reads excel file or txt file (if from tradingview);
+- Grabs the tickers within the file and puts them into a list.
+
+Calculator
+- Calculates stop;
+- Calculates desired profit;
+- Reads settings/strategy from other class;
+- Creates list of values with all calculations;
+
+Stock data
+- Reads stock ticker inserted by user;
+- Scrapes quote data from yahoo finance;
+- Scrapes technical indicator data from tradingview;
+- Calculator class will use quote data for calculations
+
+Strategy/Settings;
+- Reads from UI what settings are set up;
+- Sets up strategies rules for obtaining the correct prices
+- UI;
+
+Output File
+- Creates a list per calculation;
+- Puts this into an excel;
+- Exports excel.
+
+User Interface/User Input
+- UI via PyQT

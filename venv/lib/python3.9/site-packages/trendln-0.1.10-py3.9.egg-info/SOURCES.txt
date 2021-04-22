@@ -1,0 +1,11 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+trendln/__init__.py
+trendln.egg-info/PKG-INFO
+trendln.egg-info/SOURCES.txt
+trendln.egg-info/dependency_links.txt
+trendln.egg-info/requires.txt
+trendln.egg-info/top_level.txt

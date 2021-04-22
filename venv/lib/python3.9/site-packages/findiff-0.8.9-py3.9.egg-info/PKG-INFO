@@ -1,0 +1,36 @@
+Metadata-Version: 1.2
+Name: findiff
+Version: 0.8.9
+Summary: A Python package for finite difference derivatives in any number of dimensions.
+Home-page: https://github.com/maroba/findiff
+Author: Matthias Baer
+Author-email: mrbaer@t-online.de
+License: MIT
+Description: A Python package for finite difference derivatives in any number of dimensions.
+            
+            Features: 
+        
+                * Differentiate arrays of any number of dimensions along any axis
+                * Partial derivatives of any desired order
+                * Accuracy order can be specified
+                * Accurate treatment of grid boundary
+                * Includes standard operators from vector calculus like gradient, divergence and curl
+                * Can handle uniform and non-uniform grids
+                * Can handle arbitrary linear combinations of derivatives with constant and variable coefficients
+                * Fully vectorized for speed
+                * Calculate raw finite difference coefficients for any order and accuracy for uniform and non-uniform grids
+        
+            
+Keywords: finite-differences,numerical-derivatives,scientific-computing
+Platform: ALL
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Requires-Python: >=3.6
