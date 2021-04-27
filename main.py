@@ -7,11 +7,13 @@ from trading_strategies import \
 from file_output import FileOutputter
 
 import pprint
+import pandas as pd
+
 
 class EasyMoneyMaker:
     def __init__(self, days):
         self.stocks_data = None
-        #self.strategy = strategy  # 'Pullback', 'Support', 'Outbreak'
+        # self.strategy = strategy  # 'Pullback', 'Support', 'Outbreak'
         self.days = days  # Stays as seperate variable for if we want further additions
 
     def initiate(self):
@@ -20,11 +22,11 @@ class EasyMoneyMaker:
         for key in self.stocks_data.keys():
             for stock in self.stocks_data[key]:
                 # TODO - Doing this one by one is a bit slow, set up multithread
-                #print(stock.ticker)
+                # print(stock.ticker)
                 stock_dataframe = StockDataframe(
                     ticker=stock.ticker, days=self.days)
                 stock_dataframe.get_dataframe()
-                #print(stock_dataframe.dataframe)
+                # print(stock_dataframe.dataframe)
 
                 strategy_output = self.__read_strategy(
                     key, stock_dataframe.dataframe
@@ -38,9 +40,20 @@ class EasyMoneyMaker:
                     stock_dataclass=stock
                 )
 
-        pprint.pprint(self.stocks_data)
-        output_data = FileOutputter(self.stocks_data)
-        output_data.output_data()
+                print(f"{stock}")
+                #strategy_output.plot_technicals(stock_dataframe.dataframe)
+
+        self.__print_data(self.stocks_data)
+        # output_data = FileOutputter(self.stocks_data)
+        # output_data.output_data()
+
+    def __print_data(self, stocks_data):
+        stock_data_list = [
+            stock.__dict__ for stock_list in stocks_data.values() \
+            for stock in stock_list
+        ]
+        df = pd.DataFrame(stock_data_list)
+        print(df.all)
 
     def __read_strategy(self, key, dataframe):
         strategy_output = self._select_strategy(key,
@@ -122,9 +135,6 @@ class EasyMoneyMaker:
                 #                                 strategy_output.resistance[-1],
                 #                                 strategy_output.support[-1])
 
-
-
-
     def _select_strategy(self, strategy, df):
         current_strategies = {
             '###PULLBACK': PullbackStrategy,
@@ -138,15 +148,11 @@ class EasyMoneyMaker:
             pass  # Find out what exception this is
 
 
-
 if __name__ == '__main__':
     stock_data = EasyMoneyMaker(
         90
     )
     stock_data.initiate()
-
-
-
 
 """
 - Start input reader
@@ -162,4 +168,3 @@ if __name__ == '__main__':
 
 
 """
-
