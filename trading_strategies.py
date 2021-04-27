@@ -32,7 +32,7 @@ class Strategies:
         self.support = []
         self.resistance = []
 
-    def plot_technicals(self, df, resistance, support):
+    def plot_technicals(self, df):
         df['Date'] = pd.to_datetime(df.index)
         df['Date'] = df['Date'].apply(mpl_dates.date2num)
         df = df.loc[:, ['Date', 'Open', 'High', 'Low', 'Close']]
@@ -45,11 +45,11 @@ class Strategies:
         fig.autofmt_xdate()
         fig.tight_layout()
 
-        plt.hlines(resistance[1], xmin=df['Date'][resistance[0]], \
-                   xmax=max(df['Date']), colors='blue')
+        # plt.hlines(resistance[1], xmin=df['Date'][resistance[0]], \
+        #            xmax=max(df['Date']), colors='blue')
 
-        plt.hlines(support[1], xmin=df['Date'][support[0]], \
-                   xmax=max(df['Date']), colors='blue')
+        # plt.hlines(support[1], xmin=df['Date'][support[0]], \
+        #            xmax=max(df['Date']), colors='blue')
 
         plt.hlines(self.stop, xmin=df['Date'][2], \
                    xmax=max(df['Date']), colors='red')
@@ -126,19 +126,10 @@ class PullbackStrategy(Strategies):
         self.raw_target = self._is_highest_pivot(high)
         """^^^^^^Grabs max from latest 4-5 pivots^^^^^^"""
 
-    def plot_technicals(self):
-        """Use combination of trendln and also edit plot so that
-        stop and target are in it. Probably have to copy the method
-        from the library and adjust it."""
-        pass
-
-
     def _is_highest_pivot(self, pivots):
         latest_pivot = []
         for pivot in pivots:
             latest_pivot.append(self.df["High"].iloc[pivot])
-
-        print(latest_pivot)
 
         return max(latest_pivot)
 
@@ -240,8 +231,6 @@ class BottomingStrategy(Strategies):
         latest_pivot =[]
         for pivot in pivots:
             latest_pivot.append(self.df["High"].iloc[pivot])
-
-        print(latest_pivot)
 
         return max(latest_pivot)
 
